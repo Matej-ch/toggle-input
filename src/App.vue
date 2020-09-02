@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <toggle-input
+          label-enable-text='On'
+          label-disable-text='Off'
+          :default-state="0"
+          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ToggleInput from './components/ToggleInput.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ToggleInput
   }
 }
 </script>
