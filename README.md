@@ -19,4 +19,4 @@
 
 `default-state`  default toggle state
 
-![editable input](toggle.jpg)
+![toggle input](toggle.jpg)
