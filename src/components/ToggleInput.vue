@@ -1,10 +1,10 @@
 <template>
-    <label class="toggle__button" :class="{'active': isActive}">
+    <label class="toggle__button" :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg' }">
         <span v-if="isActive" class="toggle__label">{{ enableText }}</span>
         <span v-if="!isActive" class="toggle__label">{{ disabledText }}</span>
 
         <input type="checkbox" v-model="checkedValue" :disabled="disabled">
-        <span class="toggle__switch"></span>
+        <span class="toggle__switch" :class="{'sm': size === 'sm','lg': size==='lg'}"></span>
     </label>
 </template>
 
@@ -17,6 +17,7 @@ export default {
         labelEnableText: {type: String, default: 'On'},
         labelDisableText: {type: String, default: 'Off'},
         url: String,
+        size: {type:String, default: 'sm'},
         formInputs: Object,
     },
     data() {
@@ -60,6 +61,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+label {
+    &.lg {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    &.sm {
+        margin-bottom: 5px;
+    }
+}
+
 .active {
     .toggle__switch {
         background: #adedcb;
@@ -69,8 +82,15 @@ export default {
             transform:translateX(40px - 18px);
         }
 
-        &::after {
+        &.lg::after {
+            left: 26px;
+        }
+
+        &.sm::after {
             left: 6px;
+        }
+
+        &::after {
             background: #53B883;
             box-shadow: 0 0 1px #53B883;
         }
@@ -91,20 +111,25 @@ export default {
         }
     }
 
-    &__label {
-
-    }
-
     &__switch {
         display:inline-block;
-        height:12px;
-        border-radius:6px;
-        width:40px;
         background: #BFCBD9;
         box-shadow: inset 0 0 1px #BFCBD9;
         position:relative;
         margin-left: 10px;
         transition: all .25s;
+
+        &.sm {
+            height:12px;
+            border-radius:6px;
+            width:40px;
+        }
+
+        &.lg {
+            height: 24px;
+            border-radius: 12px;
+            width: 80px;
+        }
 
         &::after {
             background: #4D4D4D;
@@ -117,15 +142,24 @@ export default {
             opacity:0;
         }
 
+        &.lg::after,&.lg::before {
+            height: 36px;
+            width: 36px;
+            top: -6px;
+        }
+
+        &.sm::after,&.sm::before {
+            height: 18px;
+            width: 18px;
+            top: -3px;
+        }
+
         &::after, &::before {
             content: "";
             position: absolute;
             display: block;
-            height: 18px;
-            width: 18px;
             border-radius: 50%;
             left: 0;
-            top: -3px;
             transform: translateX(0);
             transition: all .25s cubic-bezier(.5, -.6, .5, 1.6);
         }

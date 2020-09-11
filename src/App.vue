@@ -13,6 +13,15 @@
           label-disable-text='Off'
           :default-state="1"
           :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+
+      <div style="width: 100%;padding: 30px"></div>
+
+      <toggle-input
+          label-enable-text='On'
+          label-disable-text='Off'
+          :default-state="1"
+          size="lg"
+          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
   </div>
 </template>
 

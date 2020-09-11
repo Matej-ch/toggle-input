@@ -5,9 +5,14 @@
     label-enable-text='On' 
     label-disable-text='Off' 
     :default-state="0"
+    size="sm"
     :form-inputs="{additionFormInput_:1 additionFormInput_2:2}" 
     url="/path/to/update" />
 ```
+
+`size` two sizes, are currently supported small (sm) and large (lg)
+
+default size is sm
 
 `url` url for updating column
 
