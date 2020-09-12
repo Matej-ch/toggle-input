@@ -14,6 +14,8 @@
 
 default size is sm
 
+`label-show` show or hide label
+
 `url` url for updating column
 
 `form-inputs` object of additional form data

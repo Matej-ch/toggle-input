@@ -1,7 +1,7 @@
 <template>
     <label class="toggle__button" :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg' }">
-        <span v-if="isActive" class="toggle__label">{{ enableText }}</span>
-        <span v-if="!isActive" class="toggle__label">{{ disabledText }}</span>
+        <span v-if="isActive && labelShow" class="toggle__label">{{ enableText }}</span>
+        <span v-if="!isActive && labelShow" class="toggle__label">{{ disabledText }}</span>
 
         <input type="checkbox" v-model="checkedValue" :disabled="disabled">
         <span class="toggle__switch" :class="{'sm': size === 'sm','lg': size==='lg'}"></span>
@@ -16,6 +16,7 @@ export default {
         disabled: {type: Boolean, default: false},
         labelEnableText: {type: String, default: 'On'},
         labelDisableText: {type: String, default: 'Off'},
+        labelShow: {type: Boolean, default: true},
         url: String,
         size: {type:String, default: 'sm'},
         formInputs: Object,
