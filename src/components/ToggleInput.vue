@@ -1,10 +1,13 @@
 <template>
-    <label class="toggle__button" :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg' }">
+    <label class="toggle__button"
+           :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg','pointer-events-none': disabled }">
         <span v-if="isActive && labelShow" class="toggle__label">{{ enableText }}</span>
         <span v-if="!isActive && labelShow" class="toggle__label">{{ disabledText }}</span>
 
         <input type="checkbox" v-model="checkedValue" :disabled="disabled">
-        <span class="toggle__switch" :class="{'sm': size === 'sm','lg': size==='lg'}"></span>
+        <span class="toggle__switch"
+              :class="{'sm': size === 'sm','lg': size==='lg', [disabledBgClass]: !isActive, [enabledBgClass]: isActive }"
+              :style="disabled ? 'opacity:0.5' : ''"></span>
     </label>
 </template>
 
@@ -20,6 +23,8 @@ export default {
         url: String,
         size: {type:String, default: 'sm'},
         formInputs: Object,
+        disabledBgClass: {type: String, default: 'bg-off'},
+        enabledBgClass: {type: String, default: 'bg-on'}
     },
     data() {
         return {
@@ -63,6 +68,20 @@ export default {
 
 <style scoped lang="scss">
 
+.bg-on {
+    background: #adedcb;
+    box-shadow: inset 0 0 1px #bcf0d4;
+}
+
+.bg-off {
+    background: #8c8c8c;
+    box-shadow: inset 0 0 1px #949494;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+}
+
 label {
     &.lg {
         margin-bottom: 10px;
@@ -76,8 +95,7 @@ label {
 
 .active {
     .toggle__switch {
-        background: #adedcb;
-        box-shadow: inset 0 0 1px #adedcb;
+
 
         &::after, &::before {
             transform:translateX(40px - 18px);
@@ -114,10 +132,9 @@ label {
 
     &__switch {
         display:inline-block;
-        background: #BFCBD9;
-        box-shadow: inset 0 0 1px #BFCBD9;
         position:relative;
         margin-left: 10px;
+        margin-right: 10px;
         transition: all .25s;
 
         &.sm {
