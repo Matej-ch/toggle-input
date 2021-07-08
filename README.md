@@ -1,5 +1,9 @@
 # Toggle input
 
+## this component is for vue js 3
+
+### for vue js 2 go [here](https://github.com/Matej-ch/toggle-column/tree/v2)
+
 ```html
 <toggle-input
     label-enable-text='On' 

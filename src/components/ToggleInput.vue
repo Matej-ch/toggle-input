@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {computed, reactive} from "vue";
 export default {
     name: "ToggleInput",
     props: {
@@ -26,27 +27,19 @@ export default {
         disabledBgClass: {type: String, default: 'bg-off'},
         enabledBgClass: {type: String, default: 'bg-on'}
     },
-    data() {
-        return {
-            currentState: this.defaultState
-        }
-    },
-    computed: {
-        isActive() {
-            return this.currentState
-        },
-        enableText() {
-            return this.labelEnableText;
-        },
-        disabledText() {
-            return this.labelDisableText;
-        },
-        checkedValue: {
-            get() {
-                return this.currentState
-            },
-            set(newValue) {
-                this.currentState = newValue;
+    setup(props) {
+        const state = reactive({
+            currentState: props.defaultState
+        });
+
+        const isActive = computed(() => state.currentState)
+        const enableText = computed(() => props.labelEnableText);
+        const disabledText = computed(() => props.labelDisableText);
+
+        const checkedValue = computed({
+            get: () => state.currentState,
+            set: val => {
+                state.currentState = val;
 
                 const form = new FormData();
 
@@ -59,8 +52,12 @@ export default {
                         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",}})
                     .then(response => {
                         console.log(response.data);
-                });
+                    });
             }
+        })
+
+        return {
+            state,isActive,enableText,disabledText,checkedValue
         }
     }
 }
