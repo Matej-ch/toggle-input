@@ -1,5 +1,7 @@
 # Toggle input
 
+## this version works with vue js 2
+
 ```html
 <toggle-input
     label-enable-text='On' 
