@@ -1,66 +1,69 @@
 <template>
-    <label class="toggle__button"
-           :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg','pointer-events-none': disabled }">
-        <span v-if="isActive && labelShow" class="toggle__label">{{ enableText }}</span>
-        <span v-if="!isActive && labelShow" class="toggle__label">{{ disabledText }}</span>
+  <label
+    class="toggle__button"
+    :class="{'active': isActive, 'sm': size==='sm','lg': size==='lg','pointer-events-none': disabled }"
+  >
+    <span
+      v-if="isActive && labelShow"
+      class="toggle__label"
+    >{{ enableText }}</span>
+    <span
+      v-if="!isActive && labelShow"
+      class="toggle__label"
+    >{{ disabledText }}</span>
 
-        <input type="checkbox" v-model="checkedValue" :disabled="disabled">
-        <span class="toggle__switch"
-              :class="{'sm': size === 'sm','lg': size==='lg', [disabledBgClass]: !isActive, [enabledBgClass]: isActive }"
-              :style="disabled ? 'opacity:0.5' : ''"></span>
-    </label>
+    <input
+      v-model="checkedValue"
+      type="checkbox"
+      :disabled="disabled"
+    >
+    <span
+      class="toggle__switch"
+      :class="{'sm': size === 'sm','lg': size==='lg', [disabledBgClass]: !isActive, [enabledBgClass]: isActive }"
+      :style="disabled ? 'opacity:0.5' : ''"
+    />
+  </label>
 </template>
 
-<script>
+<script setup>
 import {computed, reactive} from "vue";
-export default {
-    name: "ToggleInput",
-    props: {
-        defaultState: Number,
-        disabled: {type: Boolean, default: false},
-        labelEnableText: {type: String, default: 'On'},
-        labelDisableText: {type: String, default: 'Off'},
-        labelShow: {type: Boolean, default: true},
-        url: String,
-        size: {type:String, default: 'sm'},
-        formInputs: Object,
-        disabledBgClass: {type: String, default: 'bg-off'},
-        enabledBgClass: {type: String, default: 'bg-on'}
-    },
-    setup(props) {
-        const state = reactive({
-            currentState: props.defaultState
+const emit = defineEmits(['posted'])
+
+const props = defineProps({
+    defaultState: Number,
+    disabled: {type: Boolean, default: false},
+    labelEnableText: {type: String, default: 'On'},
+    labelDisableText: {type: String, default: 'Off'},
+    labelShow: {type: Boolean, default: true},
+    size: {type:String, default: 'sm'},
+    formInputs: Object,
+    disabledBgClass: {type: String, default: 'bg-off'},
+    enabledBgClass: {type: String, default: 'bg-on'}
+});
+
+const state = reactive({
+    currentState: props.defaultState
+});
+
+const isActive = computed(() => state.currentState)
+const enableText = computed(() => props.labelEnableText);
+const disabledText = computed(() => props.labelDisableText);
+
+const checkedValue = computed({
+    get: () => state.currentState,
+    set: val => {
+        state.currentState = val;
+
+        const form = new FormData();
+
+        let inputs = props.formInputs;
+        Object.keys(inputs).forEach(function (index) {
+            form.append(index,inputs[index]);
         });
 
-        const isActive = computed(() => state.currentState)
-        const enableText = computed(() => props.labelEnableText);
-        const disabledText = computed(() => props.labelDisableText);
-
-        const checkedValue = computed({
-            get: () => state.currentState,
-            set: val => {
-                state.currentState = val;
-
-                const form = new FormData();
-
-                let inputs = this.formInputs;
-                Object.keys(inputs).forEach(function (index) {
-                    form.append(index,inputs[index]);
-                });
-
-                this.$http.post(this.url,form,{headers: {
-                        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",}})
-                    .then(response => {
-                        console.log(response.data);
-                    });
-            }
-        })
-
-        return {
-            state,isActive,enableText,disabledText,checkedValue
-        }
+        emit('posted',form)
     }
-}
+})
 </script>
 
 <style scoped lang="scss">

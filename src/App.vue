@@ -1,69 +1,69 @@
 <template>
   <div id="app">
-      <toggle-input
-          label-enable-text='On'
-          label-disable-text='Off'
-          :default-state="0"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <toggle-input
+      label-enable-text="On"
+      label-disable-text="Off"
+      :default-state="0"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
 
-      <div style="width: 100%;padding: 30px"></div>
+    <div style="width: 100%;padding: 30px" />
 
-      <toggle-input
-          label-enable-text='On'
-          label-disable-text='Off'
-          :default-state="1"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <toggle-input
+      label-enable-text="On"
+      label-disable-text="Off"
+      :default-state="1"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
 
-      <div style="width: 100%;padding: 30px"></div>
+    <div style="width: 100%;padding: 30px" />
 
-      <toggle-input
-          label-enable-text='On'
-          label-disable-text='Off'
-          :default-state="1"
-          size="lg"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <toggle-input
+      label-enable-text="On"
+      label-disable-text="Off"
+      :default-state="1"
+      size="lg"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
 
-      <div style="width: 100%;padding: 30px"></div>
+    <div style="width: 100%;padding: 30px" />
 
-      <toggle-input
-          label-enable-text='On'
-          label-disable-text='Off'
-          :label-show=false
-          :default-state="1"
-          size="lg"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <toggle-input
+      label-enable-text="On"
+      label-disable-text="Off"
+      :label-show="false"
+      :default-state="1"
+      size="lg"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
 
-      <div style="width: 100%;padding: 30px"></div>
+    <div style="width: 100%;padding: 30px" />
 
-      <toggle-input
-          label-enable-text='Disabled'
-          label-disable-text='Disabled'
-          :default-state="1"
-          :disabled="true"
-          size="lg"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <toggle-input
+      label-enable-text="Disabled"
+      label-disable-text="Disabled"
+      :default-state="1"
+      :disabled="true"
+      size="lg"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
 
-      <div style="width: 100%;padding: 30px"></div>
-      <toggle-input
-          label-enable-text='Color'
-          label-disable-text='Color'
-          :default-state="1"
-          size="lg"
-          disabled-bg-class="bg-red"
-          enabled-bg-class="bg-orange"
-          :form-inputs="{modelid:'25',isEditable:1}" url='/path/to/update'/>
+    <div style="width: 100%;padding: 30px" />
+    <toggle-input
+      label-enable-text="Color"
+      label-disable-text="Color"
+      :default-state="1"
+      size="lg"
+      disabled-bg-class="bg-red"
+      enabled-bg-class="bg-orange"
+      :form-inputs="{modelid:'25',isEditable:1}"
+    />
   </div>
 </template>
 
-<script>
+<script setup>
 import ToggleInput from './components/ToggleInput.vue'
 
-export default {
-  name: 'App',
-  components: {
-    ToggleInput
-  }
-}
 </script>
 
 <style>
