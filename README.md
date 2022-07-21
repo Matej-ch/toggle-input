@@ -1,4 +1,8 @@
-# Toggle input
+# Deprecated
+
+## component was moved to repository [here](https://github.com/Matej-ch/editable-form-elements)
+
+### Toggle input
 
 ## this component is for vue js 3
 
